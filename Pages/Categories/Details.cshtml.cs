@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLOGSITE.Data;
+using BLOGSITE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BLOGSITE.Data;
-using BLOGSITE.Models;
 
 namespace BLOGSITE.Pages_Categories
 {
@@ -28,7 +28,10 @@ namespace BLOGSITE.Pages_Categories
                 return NotFound();
             }
 
-            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            var category = await _context
+                .Categories.Include(c => c.Posts)
+                    .ThenInclude(p => p.Author)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (category is not null)
             {

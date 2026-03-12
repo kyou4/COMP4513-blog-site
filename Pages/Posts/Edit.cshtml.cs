@@ -66,7 +66,7 @@ namespace BLOGSITE.Pages_Posts
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
 
         private bool PostExists(int id)
