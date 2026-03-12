@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLOGSITE.Data;
+using BLOGSITE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using BLOGSITE.Data;
-using BLOGSITE.Models;
 
 namespace BLOGSITE.Pages_Posts
 {
@@ -35,7 +35,7 @@ namespace BLOGSITE.Pages_Posts
                 return Page();
             }
 
-            _context.Post.Add(Post);
+            _context.Posts.Add(Post);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

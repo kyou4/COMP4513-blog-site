@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLOGSITE.Data;
+using BLOGSITE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BLOGSITE.Data;
-using BLOGSITE.Models;
 
 namespace BLOGSITE.Pages_Posts
 {
@@ -23,14 +23,14 @@ namespace BLOGSITE.Pages_Posts
         [BindProperty]
         public Post Post { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var post =  await _context.Post.FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _context.Posts.FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
                 return NotFound();
@@ -69,9 +69,9 @@ namespace BLOGSITE.Pages_Posts
             return RedirectToPage("./Index");
         }
 
-        private bool PostExists(string id)
+        private bool PostExists(int id)
         {
-            return _context.Post.Any(e => e.Id == id);
+            return _context.Posts.Any(e => e.Id == id);
         }
     }
 }

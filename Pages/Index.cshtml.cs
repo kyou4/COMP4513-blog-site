@@ -1,9 +1,24 @@
+using BLOGSITE.Data;
+using BLOGSITE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLOGSITE.Pages;
 
 public class IndexModel : PageModel
 {
-    public void OnGet() { }
+    private readonly BlogContext _context;
+
+    public IndexModel(BlogContext context)
+    {
+        _context = context;
+    }
+
+    public List<Post> Posts { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        Posts = await _context.Posts.ToListAsync();
+    }
 }

@@ -4,7 +4,8 @@ namespace BLOGSITE.Models;
 
 public class Post
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public string Title { get; set; } = string.Empty;
-    public string Concent { get; set; } = string.Empty;
+    public string Content { get; set; } = string.Empty;
+    public string Excerpt => Content.Length > 100 ? Content.Substring(0, 100) + "..." : Content;
 }
