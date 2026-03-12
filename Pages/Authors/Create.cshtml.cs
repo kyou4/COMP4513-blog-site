@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BLOGSITE.Pages_Posts
+namespace BLOGSITE.Pages_Authors
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace BLOGSITE.Pages_Posts
         }
 
         [BindProperty]
-        public Post Post { get; set; } = default!;
+        public Author Author { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +35,7 @@ namespace BLOGSITE.Pages_Posts
                 return Page();
             }
 
-            _context.Posts.Add(Post);
+            _context.Authors.Add(Author);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("/Index");

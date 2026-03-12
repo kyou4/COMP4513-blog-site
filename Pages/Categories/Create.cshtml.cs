@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BLOGSITE.Data;
-using BLOGSITE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using BLOGSITE.Data;
+using BLOGSITE.Models;
 
-namespace BLOGSITE.Pages_Posts
+namespace BLOGSITE.Pages_Categories
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace BLOGSITE.Pages_Posts
         }
 
         [BindProperty]
-        public Post Post { get; set; } = default!;
+        public Category Category { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,10 +35,10 @@ namespace BLOGSITE.Pages_Posts
                 return Page();
             }
 
-            _context.Posts.Add(Post);
+            _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("./Index");
         }
     }
 }
