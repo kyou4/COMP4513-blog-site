@@ -20,6 +20,7 @@ namespace BLOGSITE.Pages_Posts
         }
 
         public Post Post { get; set; } = default!;
+        public List<Post> RelatedPosts { get; set; } = new List<Post>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +37,9 @@ namespace BLOGSITE.Pages_Posts
 
                 return Page();
             }
+            RelatedPosts = await _context
+                .Posts.Where(p => p.CategoryId == post.CategoryId && p.Id != post.Id)
+                .ToListAsync();
 
             return NotFound();
         }
