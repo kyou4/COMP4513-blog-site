@@ -34,12 +34,12 @@ namespace BLOGSITE.Pages_Posts
             if (post is not null)
             {
                 Post = post;
+                RelatedPosts = await _context
+                    .Posts.Where(p => p.CategoryId == post.CategoryId && p.Id != post.Id)
+                    .ToListAsync();
 
                 return Page();
             }
-            RelatedPosts = await _context
-                .Posts.Where(p => p.CategoryId == post.CategoryId && p.Id != post.Id)
-                .ToListAsync();
 
             return NotFound();
         }
